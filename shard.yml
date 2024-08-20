@@ -1,0 +1,9 @@
+name: hana
+version: 0.1.0
+
+authors:
+  - Chao Yang <cyang05@outlook.com>
+
+crystal: '>= 1.13.1'
+
+license: MIT
