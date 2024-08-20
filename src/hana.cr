@@ -7,7 +7,7 @@ struct JSON::Any
 end
 
 module Hana
-  VERSION = "1.3.7"
+  VERSION = "0.1.0"
 
   class Error < ::Exception
   end
