@@ -1,4 +1,6 @@
 require "./spec_helper"
+require "./patch_test_case"
+require "./error_mapper"
 
 describe Hana do
   files = [

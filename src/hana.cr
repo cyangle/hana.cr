@@ -46,9 +46,9 @@ module Hana
 
         if result.raw.is_a?(Array)
           raise Patch::IndexError.new unless part =~ /\A(?:\d|[1-9]\d+)\Z/
-          next result = result.as_a[part.to_i]
+          next result = result.as_a[part.to_i]? || JSON::Any.new(nil)
         end
-        result = result.as_h[part]
+        result = result.as_h[part]? || JSON::Any.new(nil)
       end
       result
     end
@@ -130,7 +130,7 @@ module Hana
         when "replace" then new_doc = replace(ins, new_doc)
         when "remove"  then new_doc = remove(ins, new_doc)
         when "copy"    then new_doc = copy(ins, new_doc)
-        else                raise Exception.new("bad method `#{op}`")
+        else                raise Error.new("bad method `#{op}`")
         end
       end
       new_doc
@@ -278,9 +278,11 @@ module Hana
 
         array.delete_at(index)
       else
-        hash = obj.as_h
-        raise Patch::MissingTargetException.new("key '#{key}' not found") unless hash.try &.has_key? key
-        hash.delete(key).not_nil!
+        if (hash = obj.as_h?) && hash.has_key?(key)
+          hash.delete(key).not_nil!
+        else
+          raise Patch::MissingTargetException.new("key '#{key}' not found")
+        end
       end
     end
   end
