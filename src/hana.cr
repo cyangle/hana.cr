@@ -103,8 +103,15 @@ module Hana
 
     @is : Array(Hash(String, ::JSON::Any))
 
-    def initialize(is)
-      @is = is
+    def initialize(@is)
+    end
+
+    def initialize(json_string : String)
+      @is = Array(Hash(String, ::JSON::Any)).from_json(json_string)
+    end
+
+    def initialize(io : IO)
+      @is = Array(Hash(String, ::JSON::Any)).from_json(io)
     end
 
     def apply(doc)
@@ -113,7 +120,8 @@ module Hana
 
     def really_apply(doc)
       new_doc = doc.dup
-      @is.each do |ins|
+      # Clone @is here, so that it could be applied to another doc
+      @is.clone.each do |ins|
         op = ins["op"].as_s.strip
         case op
         when "add"     then new_doc = add(ins, new_doc)

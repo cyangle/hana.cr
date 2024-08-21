@@ -17,13 +17,14 @@ describe Hana do
       # puts "=====#{index}====="
       # pp test
       if expected = test.expected
-        patch = ::Hana::Patch.new test.patch
+        patch = Hana::Patch.new test.patch
         result = patch.apply(test.doc)
         result.should eq(expected)
       end
+
       if error = test.error
-        exception = expect_raises(::ErrorMapper.error_class(error)) do
-          patch = ::Hana::Patch.new test.patch
+        exception = expect_raises(ErrorMapper.error_class(error)) do
+          patch = Hana::Patch.new test.patch
           result = patch.apply(test.doc)
         end
       end

@@ -29,11 +29,9 @@ Example json patches in json:
 ```crystal
 require "hana"
 
-patch_data = Array(Hash(String, ::JSON::Any)).from_json(
-  File.read("/file/path/to/json_patches.json")
-)
+patch_json = File.read("/file/path/to/json_patches.json")
 
-patch = Hana::Patch.new(patch_data)
+patch = Hana::Patch.new(patch_json)
 
 doc = JSON.parse(%({"foo":"bar"}))
 
