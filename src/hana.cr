@@ -199,7 +199,7 @@ module Hana
 
       raise MissingTargetException.new("target location '#{ins["path"]}' does not exist") unless dest
 
-      add_op dest, key, obj
+      add_op dest, key, obj.clone
       doc
     end
 
