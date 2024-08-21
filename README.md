@@ -1,6 +1,6 @@
 # hana
 
-crystal port of ruby gem hana.
+crystal port of ruby gem [hana][3].
 
 Implementation of [JSON Patch][1] and [JSON Pointer][2] RFC.
 
@@ -75,3 +75,4 @@ crystal spec
 
 [1]: https://datatracker.ietf.org/doc/rfc6902/
 [2]: http://tools.ietf.org/html/rfc6901
+[3]: https://github.com/tenderlove/hana
