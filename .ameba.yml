@@ -1,0 +1,17 @@
+Excluded:
+  - local
+  - bin
+
+Metrics/CyclomaticComplexity:
+  Description: Disallows methods with a cyclomatic complexity higher than `MaxComplexity`
+  MaxComplexity: 10
+  Excluded:
+  - spec/support/error_mapper.cr
+  Enabled: true
+  Severity: Warning
+
+Lint/NotNil:
+  Description: Identifies usage of `not_nil!` calls
+  Excluded:
+  Enabled: false
+  Severity: Warning

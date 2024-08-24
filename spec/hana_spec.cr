@@ -1,6 +1,6 @@
 require "./spec_helper"
-require "./patch_test_case"
-require "./error_mapper"
+require "./support/patch_test_case"
+require "./support/error_mapper"
 
 describe Hana do
   files = [
@@ -15,7 +15,7 @@ describe Hana do
   tests.each_with_index do |test, index|
     next if case_number > -1 && case_number != index
     next if test.disabled == true
-    it "#{index}: #{test.comment.to_s}" do
+    it "#{index}: #{test.comment}" do
       # puts "=====#{index}====="
       # pp test
       if expected = test.expected
@@ -25,7 +25,7 @@ describe Hana do
       end
 
       if error = test.error
-        exception = expect_raises(ErrorMapper.error_class(error)) do
+        expect_raises(ErrorMapper.error_class(error)) do
           patch = Hana::Patch.new test.patch
           result = patch.apply(test.doc)
         end

@@ -27,7 +27,7 @@ module Hana
       @path = Pointer.parse path
     end
 
-    def each(&block)
+    def each(&)
       @path.each do |part|
         yield part
       end
@@ -42,7 +42,7 @@ module Hana
     def self.eval(list : Array(String), object : JSON::Any) : JSON::Any
       result = object
       list.each do |part|
-        return result if result.raw.is_a?(Nil)
+        return result if result.raw.nil?
 
         if result.raw.is_a?(Array)
           raise Patch::IndexError.new unless part =~ /\A(?:\d|[1-9]\d+)\Z/
@@ -60,7 +60,7 @@ module Hana
       raise FormatError.new("JSON Pointer should start with a slash") unless path.starts_with? "/"
 
       parts = path.sub(%r{^/}, "").split(%r{(?<!\^)/}).map do |part|
-        part.gsub(%r{\^[/^]|~[01]}) { |m| ESC[m] }
+        part.gsub(%r{\^[/^]|~[01]}) { |key| ESC[key] }
       end
 
       parts.push("") if path[-1] == "/"

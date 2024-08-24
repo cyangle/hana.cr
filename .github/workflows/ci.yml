@@ -19,8 +19,12 @@ jobs:
         uses: crystal-lang/install-crystal@v1
         with:
           crystal: latest
+      - name: Install dependencies
+        run: shards install
       - name: Check formatting
         run: crystal tool format --check
+      - name: Run ameba
+        run: ./bin/ameba
 
   test:
     name: Test with crystal ${{ matrix.crystal_version }}

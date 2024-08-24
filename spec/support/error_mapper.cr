@@ -1,4 +1,4 @@
-require "../src/hana"
+require "../../src/hana"
 
 class ErrorMapper
   def self.error_class(msg : String) : Class

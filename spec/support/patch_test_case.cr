@@ -20,11 +20,11 @@ class PatchTestCase
   property disabled : Bool?
 
   def self.from_files(paths : Array(String)) : Array(PatchTestCase)
-    paths.map do |path|
+    paths.flat_map do |path|
       File.open(path) do |file|
         Array(PatchTestCase).from_json(file)
       end
-    end.flatten
+    end
   end
 
   def initialize(*, @doc, @patch, @expected, @error, @comment, @disabled)
