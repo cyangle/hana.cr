@@ -34,7 +34,7 @@
       "patch": [{"op": "add", "path": "/1e0", "value": "bar"}],
       "error": "add op shouldn't add to array with bad number" },
 
-    { "comment": "test copy object then change copied",
+    { "comment": "test copy object then change destination",
       "doc": {"foo": {"bar": {"baz": [{"boo": "net"}]}}},
       "patch": [
         {"op": "copy", "from": "/foo", "path": "/bak"},
