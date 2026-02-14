@@ -7,7 +7,7 @@ struct JSON::Any
 end
 
 module Hana
-  VERSION = "0.1.0"
+  VERSION = "0.1.1"
 
   class Error < ::Exception
   end
@@ -146,7 +146,7 @@ module Hana
       dest = Pointer.eval list, doc
       obj = ins[VALUE]
 
-      raise MissingTargetException.new("target location '#{ins["path"]}' does not exist") unless dest
+      raise MissingTargetException.new("target location '#{ins["path"]}' does not exist") if dest.raw.nil?
 
       if key
         add_op dest, key, obj
@@ -167,7 +167,7 @@ module Hana
       src = Pointer.eval from, doc
       dest = Pointer.eval to, doc
 
-      raise MissingTargetException.new("target location '#{ins["path"]}' does not exist") unless dest
+      raise MissingTargetException.new("target location '#{ins["path"]}' does not exist") if dest.raw.nil?
 
       obj = rm_op src, from_key
       add_op dest, key, obj
@@ -197,7 +197,7 @@ module Hana
         end
       end
 
-      raise MissingTargetException.new("target location '#{ins["path"]}' does not exist") unless dest
+      raise MissingTargetException.new("target location '#{ins["path"]}' does not exist") if dest.raw.nil?
 
       add_op dest, key, obj.clone
       doc

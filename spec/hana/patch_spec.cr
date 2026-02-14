@@ -84,5 +84,18 @@ describe Hana::Patch do
         end
       end
     end
+
+    context "add to missing parent" do
+      it "raises MissingTargetException" do
+        expect_raises(
+          Hana::Patch::MissingTargetException,
+          "target location '/missing/foo' does not exist"
+        ) do
+          patch = Hana::Patch.new(%([{"op": "add", "path": "/missing/foo", "value": "bar"}]))
+          doc = JSON.parse("{}")
+          patch.apply(doc)
+        end
+      end
+    end
   end
 end
