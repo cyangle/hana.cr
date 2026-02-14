@@ -15,7 +15,7 @@ Implementation of [JSON Patch][1] (RFC 6902) and [JSON Pointer][2] (RFC 6901).
    dependencies:
      hana:
        github: cyangle/hana.cr
-       version: ~> 0.1.0
+       version: ~> 0.1.1
    ```
 
 2. Run `shards install`
